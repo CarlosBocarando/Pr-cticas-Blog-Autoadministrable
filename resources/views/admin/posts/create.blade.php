@@ -3,7 +3,7 @@
 @section('title', 'Blog')
 
 @section('content_header')
-<h1>Crear nueva categoría</h1>
+<h1>Crear nueva post</h1>
 @stop
 
 @section('content')

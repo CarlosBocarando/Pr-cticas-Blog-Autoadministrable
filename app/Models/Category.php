@@ -9,8 +9,17 @@ class Category extends Model
 {
     use HasFactory;
 
-        //Relación de uno a muchos, respecto a Post
-        public function posts() {
-            return $this->hasMany(Post::class);
-        }
+    protected $fillable = ['name', 'slug'];
+
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    //Relación de uno a muchos, respecto a Post
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

@@ -3,13 +3,19 @@
 @section('title', 'Blog')
 
 @section('content_header')
-<h1>Crear nueva categoría</h1>
+<h1>Editar post</h1>
 @stop
 
 @section('content')
+
+@if(session('info'))
+<div class="alert alert-success">
+    <strong>{{session('info')}}</strong>
+</div>
+@endif
 <div class="card">
     <div class="card-body">
-        {!! Form::open(['route'=>'admin.categories.store']) !!}
+        {!! Form::model($category, ['route'=>['admin.categories.update', $category], 'method' => 'put']) !!}
         <div class="form-group">
             {!! Form::label('name','Nombre') !!}
             {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre de la categoría'] ) !!}
@@ -22,15 +28,19 @@
             {!! Form::label('slug','Slug') !!}
             {!! Form::text('slug', null, ['class' => 'form-control', 'placeholder' => 'El slug de la categoría se actualizará sólo', 'readonly'] ) !!}
 
-            
+
             @error('slug')
             <span class="text-danger">{{$message}}</span>
             @enderror
         </div>
-        {!! Form::submit('Crear categoría', ['class'=> ' btn btn-success'] ) !!}
+        {!! Form::submit('Actualizar categoría', ['class'=> ' btn btn-success'] ) !!}
         {!! Form::close() !!}
     </div>
 </div>
+@stop
+
+@section('css')
+<link rel="stylesheet" href="/css/admin_custom.css">
 @stop
 
 @section('js')

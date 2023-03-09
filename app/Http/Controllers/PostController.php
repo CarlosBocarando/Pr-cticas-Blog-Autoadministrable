@@ -11,7 +11,9 @@ class PostController extends Controller
 {
    public function index()
    {
-      $posts = Post::where('status', 2)->latest('id')->paginate(8);
+      $posts = Post::where('status', 2)
+         //->leftJoin('images', 'posts.id', '=', 'images.imageable_id')
+         ->latest('id')->paginate(8);
 
       return view('posts.index', compact('posts'));
    }
@@ -30,10 +32,10 @@ class PostController extends Controller
    public function category(Category $category)
    {
       $posts = Post::where('category_id', $category->id)
-                        ->where('status', 2)
-                        ->latest('id')
-                        ->paginate(6);
-                        return view('posts.category', compact('posts', 'category'));
+         ->where('status', 2)
+         ->latest('id')
+         ->paginate(6);
+      return view('posts.category', compact('posts', 'category'));
    }
 
    public function tag(Tag $tag)

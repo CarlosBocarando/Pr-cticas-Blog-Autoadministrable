@@ -3,7 +3,8 @@
 @section('title', 'Blog')
 
 @section('content_header')
-    <h1>Blog</h1>
+    <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.posts.create')}}">Nuevo post</a>
+<h1>Listado de posts</h1>
 @stop
 
 @section('content')

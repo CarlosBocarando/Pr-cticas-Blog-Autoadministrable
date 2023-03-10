@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
+
             $table ->string('name');
             $table ->string('slug');
-            $table ->text('extract');
-            $table ->longText('body');
+
+            $table ->text('extract')->nullable();
+            $table ->longText('body')->nullable();
+
             $table -> enum('status', [1,2]) -> default(1); //Dos posibles valores, 1 representa al borrador y 2 al estado publicado
 
             $table -> unsignedBigInteger('user_id');
@@ -24,6 +27,7 @@ return new class extends Migration
 
             $table ->foreign('user_id')-> references('id')->on('users')->onDelete('cascade'); 
             $table ->foreign('category_id')-> references('id')->on('categories')->onDelete('cascade'); //onDelete(Cascade), hace referencia a que si se elimina una categoría se eliminen todos los posts referentes a ella
+            
             $table->timestamps();
         });
     }

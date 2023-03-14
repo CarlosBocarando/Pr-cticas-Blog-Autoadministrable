@@ -1,7 +1,7 @@
 @props(['post'])
 
 <article class="mb-8 bg-white shadow-lg rounded-lg overflow-hidden">
-    @if($post->image)
+    @if ($post->image)
     <img class="w-full h-72 object-cover object-center" src="{{Storage::url($post->image->url)}}" alt="">
     @else
     <img class="w-full h-72 object-cover object-center" src="https://cdn.pixabay.com/photo/2023/03/01/20/36/flowers-7823985_1280.jpg" alt="">

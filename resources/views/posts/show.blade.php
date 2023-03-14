@@ -7,8 +7,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <!-- Contenido principal -->
             <div class="lg:col-span-2">
-                <figure>
-                    @if($post->image)
+                <figure>  
+                    @if ($post->image)
                     <img class="w-full h-80 object-cover object-center" src="{{Storage::url($post->image->url)}}" alt="">
                     @else
                     <img class="w-full h-80 object-cover object-center" src="https://cdn.pixabay.com/photo/2023/03/01/20/36/flowers-7823985_1280.jpg" alt="">
@@ -27,7 +27,7 @@
                     @foreach ($similares as $similar)
                     <li class="mb-4">
                         <a class="flex" href="{{route('posts.show', $similar)}}">
-                            @if($similar->image)
+                            @if ($similar->image)
                             <img class="w-36 h-20 object-cover object-center" src="{{Storage::url($similar->image->url)}}" alt="">
                             @else
                             <img class="w-full h-80 object-cover object-center" src="https://cdn.pixabay.com/photo/2023/03/01/20/36/flowers-7823985_1280.jpg" alt="">

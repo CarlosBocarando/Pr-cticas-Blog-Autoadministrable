@@ -3,11 +3,11 @@
 @section('title', 'Blog')
 
 @section('content_header')
-    <h1>Blog</h1>
+    <h1>Lista de usuarios</h1>
 @stop
 
 @section('content')
-    <p>Bienvenid@ a este panel funcional, siéntete libre para explorarlo.</p>
+    @livewire('admin.users-index')
 @stop
 
 @section('css')

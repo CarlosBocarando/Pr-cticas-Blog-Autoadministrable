@@ -12,9 +12,19 @@ use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\PostRequest;
 
+use Illuminate\Support\Facades\Cache;
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin.posts.index')->only('index');
+        $this->middleware('can:admin.posts.create')->only('create', 'store');
+        $this->middleware('can:admin.posts.edit')->only('edit', 'update');
+        $this->middleware('can:admin.posts.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -51,19 +61,14 @@ class PostController extends Controller
             ]);
         }
 
+        Cache::flush();
+
         if ($request->tags) {
             $post->tags()->attach($request->tags);
         }
         return redirect()->route('admin.posts.edit', $post);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        return view('admin.posts.show', compact('post'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -109,6 +114,8 @@ class PostController extends Controller
             $post->tags()->sync($request->tags);
         }
 
+        Cache::flush();
+
         return redirect()->route('admin.posts.edit', $post)->with('info', 'El post se actualizó con éxito');
     }
 
@@ -121,6 +128,9 @@ class PostController extends Controller
 
 
         $post->delete();
+
+        Cache::flush();
+
         return redirect()->route('admin.posts.index', $post)->with('info', 'El post se eliminó correctamente');
     }
 }
